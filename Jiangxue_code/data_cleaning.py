@@ -18,6 +18,7 @@ print(raw_train.head())
 print (raw_train.columns)
 print (raw_train.shape)
 
+############################### Train ####################################
 # 1. Explore the correlation
 
 # Top 10 heat map
@@ -81,7 +82,75 @@ stats.probplot(train['SalePrice'], plot=plt)
 
 train['MSSubClass'] = train['MSSubClass'].astype(str)        # Convert MSSubClass to categorical data
 qualitative = [qual for qual in train.columns if train.dtypes[qual] == 'O']
-quantitative = [qual for qual in train.columns if train.dtypes[qual] != 'O']
+quantitative = [quan for quan in test.columns if quan not in qualitative]
+print("qualitative: {}, quantitative: {}" .format (len(qualitative),len(quantitative)))
+
+# Have a look at the skewness of quantitative data
+melt = pd.melt(train, value_vars=quantitative)
+splot = sns.FacetGrid(melt, col="variable",  col_wrap=4, sharex=False, sharey=False)
+splot.map(sns.distplot, "value")
+
+df_skew = pd.DataFrame({'Variable':quantitative, 'Skewness':skew(train[quantitative])})
+df_skew = df_skew.sort_values(by=['Skewness'], ascending=False)
+df_skew
+
+# Normalize some quantitative data by log transformation
+log_cols = ['LotFrontage','LotArea','1stFlrSF','GrLivArea','KitchenAbvGr']
+
+for col in log_cols:
+    train[col] = np.log1p(train[col].values)
+
+df_skew_new = pd.DataFrame({'Variable':quantitative, 'Skewness':skew(train[quantitative])})
+df_skew_new = df_skew_new.sort_values(by=['Skewness'], ascending=False)
+df_skew_new
+
+melt = pd.melt(train, value_vars=log_cols)
+splot = sns.FacetGrid(melt, col="variable",  col_wrap=4, sharex=False, sharey=False)
+splot.map(sns.distplot, "value")
+
+# Check the amount of zero
+def get_zero_rate(dataframe):
+    zero_count = len(dataframe) - dataframe.astype(bool).sum(axis=0)
+    zero_rate = zero_count / len(dataframe)
+    zero_df = pd.concat([zero_count, zero_rate], axis=1, keys=['count', 'percent'])
+    zero_df = zero_df.sort_values(['percent'],ascending=False)
+    return zero_df
+
+df_zero = get_zero_rate(train).head(10)
+df_zero
+
+# If one column has too many zero ( > 90%), then delete the columns
+drop_cols = list(df_zero[df_zero.percent > 0.9].index) 
+train = train.drop(drop_cols, axis=1)
+
+# For those columns with percentage of zero about 50%, convert them to the dummy variable
+def convert_to_boolean(column):
+    return train[column].apply(lambda x: 0 if x > 0 else 1)
+
+train['has2ndFlr'] = convert_to_boolean('2ndFlrSF')
+train['hasWoodDeck'] = convert_to_boolean('WoodDeckSF')
+train['hasOpenPorch'] = convert_to_boolean('OpenPorchSF')
+
+train.shape
+# train.to_csv('train_after_cleaning.csv',index=False)
+
+############################### Test ####################################
+
+test = raw_test.drop(drop_names, axis=1)
+
+test = test.drop(['FireplaceQu'],axis=1)
+
+test['LotFrontage'] = test['LotFrontage'].fillna(test['LotFrontage'].mean())
+
+test['hasGarage'] = test['GarageYrBlt'].notnull().astype(int)
+test['hasBasement'] = test['BsmtQual'].notnull().astype(int)
+
+test = test.dropna(axis = 'columns')
+get_na_rate(test)
+
+test['MSSubClass'] = train['MSSubClass'].astype(str)        # Convert MSSubClass to categorical data
+qualitative = [qual for qual in test.columns if test.dtypes[qual] == 'O']
+quantitative = [quan for quan in test.columns if quan not in qualitative]
 print("qualitative: {}, quantitative: {}" .format (len(qualitative),len(quantitative)))
 
 # Have a look at the skewness of quantitative data
