@@ -45,7 +45,7 @@ df_na = get_na_rate(raw_train)
 df_na.head(20)
 
 # If na rate is higher than 0.5, then drop the column
-drop_names = list(df_na[df_na.percent > 0.5].index) 
+drop_names = list(df_na[df_na.percent > 0.6].index) 
 train = raw_train.drop(drop_names, axis=1)
 
 # FireplaceQu's na rate is about 50% but we already have another feature "Fireplaces"
@@ -205,7 +205,7 @@ GBoostMd = GBoost.fit(x_train.values,y_train)
 ############################### Test ####################################
 
 df_na = get_na_rate(raw_test)
-drop_names = list(df_na[df_na.percent > 0.5].index) 
+drop_names = list(df_na[df_na.percent > 0.6].index) 
 test = raw_test.drop(drop_names, axis=1)
 get_na_rate(test)
 test = test.drop(['FireplaceQu'],axis=1)
