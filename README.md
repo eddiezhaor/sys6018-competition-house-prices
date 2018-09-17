@@ -18,4 +18,5 @@ He wrote 3 different KNN methods:
 1. Weighted KNN with euclidean distance  2. Weighted KNN with Manhattan distance  3. Weighted KNN with Gaussian Kernel
 
 Karan Kant mainly worked on feature selection.
+
 He tested the performance for categorical data
