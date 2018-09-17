@@ -19,4 +19,4 @@ He wrote 3 different KNN methods:
 
 Karan Kant mainly worked on feature selection.
 
-He tested the performance for categorical data
+He tested the performance for categorical data.
