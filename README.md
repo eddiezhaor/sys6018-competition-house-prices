@@ -2,6 +2,7 @@
 
 ## Competition Description:
 Ask a home buyer to describe their dream house, and they probably won't begin with the height of the basement ceiling or the proximity to an east-west railroad. But this playground competition's dataset proves that much more influences price negotiations than the number of bedrooms or a white-picket fence.
+![alt text](https://kaggle2.blob.core.windows.net/competitions/kaggle/5407/media/housesbanner.png)
 
 With 79 explanatory variables describing (almost) every aspect of residential homes in Ames, Iowa, this competition challenges you to predict the final price of each home.
 
@@ -18,5 +19,4 @@ He wrote 3 different KNN methods:
 1. Weighted KNN with euclidean distance  2. Weighted KNN with Manhattan distance  3. Weighted KNN with Gaussian Kernel
 
 Karan Kant mainly worked on feature selection.
-
-He tested the performance for categorical data.
+He tested the performance for categorical data
