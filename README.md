@@ -5,5 +5,6 @@
 
 
 # Contributions:
-# Runhao Zhao mainly works on non-parametric approach. 
-### He
+### Runhao Zhao mainly works on non-parametric approach. 
+### He wrote 4 different knn methods: 
+### 1. 
