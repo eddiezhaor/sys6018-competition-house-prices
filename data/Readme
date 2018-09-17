@@ -1,0 +1,8 @@
+
+train.csv,test.csv: Raw data
+
+x_train_dummies.csv: training dataset after cleaning excluding SalePrice
+
+y_train.csv: SalePrice after log transformation
+
+x_test_dummies.csv: test dataset after cleaning
