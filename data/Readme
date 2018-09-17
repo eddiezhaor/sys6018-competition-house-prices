@@ -6,3 +6,5 @@ x_train_dummies.csv: training dataset after cleaning excluding SalePrice
 y_train.csv: SalePrice after log transformation
 
 x_test_dummies.csv: test dataset after cleaning
+
+x_train_sd.csv, x_test_sd.csv: Standardized data from x_train_dummies.csv and x_test_dummies.csv
