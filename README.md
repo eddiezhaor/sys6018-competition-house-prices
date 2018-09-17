@@ -2,4 +2,8 @@
 
 # Introduction:
 # 
-# Runhao Zhao works
+
+
+# Contributions:
+# Runhao Zhao mainly works on non-parametric approach. 
+### He
