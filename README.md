@@ -3,7 +3,7 @@
 ## Introduction:
 ## 
 
-## Team Member:
+## Team member:
 Jiangxue Han, Runhao Zhao, Karan Kant
 
 ## Contributions:
