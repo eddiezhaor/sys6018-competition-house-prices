@@ -146,13 +146,13 @@ all_data['hasFireplaces'] = convert_to_boolean('Fireplaces')
 all_data['hasOpenPorch'] = convert_to_boolean('OpenPorchSF')
 
 all_data.shape
-# (2919, 71)
+# (2919, 65)
 
 # Convert the categorical data to dummy variables
 dummies_data = pd.get_dummies(all_data)
 
 dummies_data.shape
-# (2919, 280)
+# (2919, 274)
 
 # Split train and test data
 x_train = dummies_data.iloc[0:len(x_train),]
@@ -163,10 +163,10 @@ x_train = x_train.drop(['Id'],axis=1)
 x_test = x_test.drop(['Id'],axis=1)
 
 x_train.shape
-# (1460, 279)
+# (1460, 273)
 
 x_test.shape
-# (1459, 279)
+# (1459, 273)
 
 # Export the dataframe to the csv files
 x_train.to_csv('x_train_dummies.csv',index=False)
