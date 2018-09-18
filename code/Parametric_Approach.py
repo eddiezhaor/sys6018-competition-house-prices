@@ -38,7 +38,7 @@ alphas = np.arange(0.01,10,0.01)
 ridge_cv = RidgeCV(alphas=alphas)
 cv_score = ridge_cv.fit(x_train_org, y_train_org)
 cv_score.alpha_
-# 5.33
+# 5.08
 
 # Train ridge model with the training dataset after cross validation
 ridge = Ridge(alpha=5.33)
@@ -46,7 +46,7 @@ ridge.fit(x_train,y_train)
 pred = ridge.predict(x_cv)                      # Uses the validation set for prediction
 mse = np.mean((pred - y_cv.values)**2)          # Calculates the mean squared error
 mse                                             
-# 0.019773649628076432
+# 0.01647050684221818
 
 # 3. Lasso Regression
 # Select the best alpha using the entire training set
@@ -61,7 +61,7 @@ lasso.fit(x_train,y_train)
 pred = lasso.predict(x_cv)                      # Uses the validation set for prediction
 mse = np.mean((pred - y_cv.values)**2)          # Calculates the mean squared error
 mse
-# 0.29470190417959585
+# 0.2890502578714499
 
 # Train the models based on entire training dataset
 ridge.fit(x_train_org,y_train_org)
